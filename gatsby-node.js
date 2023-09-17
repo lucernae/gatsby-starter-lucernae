@@ -33,6 +33,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             title
             date
             description
+            category
           }
           internal {
             contentFilePath
@@ -188,6 +189,8 @@ exports.createSchemaCustomization = ({ actions, schema, getNode, getNodesByType,
       description: String
       date: Date @dateformat
       layout: String
+      category: String
+      tags: String
     }
 
     type Fields {

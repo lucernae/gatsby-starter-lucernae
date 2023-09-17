@@ -4,8 +4,6 @@ import { Link } from "gatsby"
 // import { rhythm, scale } from "../utils/typography"
 import "katex/dist/katex.min.css"
 
-import NavigationPanel from "./navigation"
-
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
   const isRootPath = location.pathname === rootPath
@@ -17,11 +15,6 @@ const Layout = ({ location, title, children }) => {
         <Link to="/">{title}</Link>
       </h1>
     )
-    // header = (
-    //   <NavigationPanel>
-    //     Hello World
-    //   </NavigationPanel>
-    // )
   } else {
     header = (
       <Link className="header-link-home" to="/">
@@ -32,7 +25,6 @@ const Layout = ({ location, title, children }) => {
 
   return (
     <div className="global-wrapper" data-is-root-path={isRootPath}>
-      <NavigationPanel>Hello World</NavigationPanel>
       <header className="global-header">{header}</header>
       <main>{children}</main>
       <footer>

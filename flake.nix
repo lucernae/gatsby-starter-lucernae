@@ -21,13 +21,13 @@
             openssl = pkgs.openssl_1_1;
           };
           bunV1 = pkgs.bun.overrideAttrs (final: prev: with pkgs; prev // rec {
-            version = "1.0.0";
+            version = "1.0.2";
             src = passthru.sources.${stdenvNoCC.hostPlatform.system} or (throw "Unsupported system: ${stdenvNoCC.hostPlatform.system}");
             passthru = prev.passthru // {
               sources =  prev.passthru.sources // {
                 "aarch64-darwin" = fetchurl {
                   url = "https://github.com/oven-sh/bun/releases/download/bun-v${version}/bun-darwin-aarch64.zip";
-                  sha256 = "sha256-Bd8KL1IbWBRiMZq4YPhNLdhBOqRReCFeUPAilLfk0TM=";
+                  sha256 = "sha256-QvoEakfR5wmP10d6MDpfS8THke975bVyZc5pLVliUbQ=";
                 };
               };
             };
@@ -39,7 +39,7 @@
             {
               name = "yarn";
               package = pkgs.yarn.override {
-                nodejs = pkgs.nodejs;
+                nodejs = bunV1;
               };
             }
             {
@@ -55,7 +55,10 @@
               package = bunV1;
             }
           ];
-          packages = [ ];
+          packages = [
+            # (pkgs.writeShellScriptBin "node" ''exec -a node bun "$@"'')
+            # (pkgs.writeShellScriptBin "yarn" ''exec -a yarn bun "$@"'')
+           ];
           env = [];
         };
     });

@@ -19,7 +19,7 @@ const wrapESMPlugin = name =>
  */
 module.exports = {
   siteMetadata: {
-    title: `Maulana's personal blog`,
+    title: `Maulana's Gatsby Template`,
     author: {
       name: `Rizky Maulana Nugraha`,
       summary: `Software Developer. Currently remotely working from Indonesia.`,
@@ -30,6 +30,24 @@ module.exports = {
       twitter: `maulana_pcfre`,
       github: `lucernae`,
     },
+    navigationLinks: [
+      {
+        title: "All",
+        link: "/"
+      },
+      {
+        title: "Blogs",
+        link: "/blogs"
+      },
+      {
+        title: "Software Development",
+        link: "/soft-dev"
+      },
+      {
+        title: "Physics Notes",
+        link: "/physics"
+      },
+    ],
   },
   plugins: [
     `gatsby-plugin-image`,
