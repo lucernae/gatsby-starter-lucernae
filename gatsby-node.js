@@ -10,9 +10,40 @@ const slugify = require(`@sindresorhus/slugify`)
 const { compileMDXWithCustomOptions } = require(`gatsby-plugin-mdx`)
 const { remarkHeadingsPlugin } = require(`./remark-headings-plugin`)
 const { node } = require('prop-types')
+const { siteMetadata } = require('./gatsby-config')
 
-// Define the template for blog post
-const blogPost = path.resolve(`./src/templates/blog-post.js`)
+const createIndexPage = async ({actions, post, postCount, categoriesList}) => {
+  const { createPage } = actions
+  const limit = siteMetadata.config.paginationPageSize
+  const layout = post.frontmatter.layout || 'index-post'
+  const template = path.resolve(`./src/templates/${layout}.js`)
+  for(let i=0; i<postCount; i+=limit) {
+    let path = post.fields.slug
+    if(i!=0){
+      let pageIndex = Math.floor(i/limit) + 1
+      if(path === "/") {
+        path = `/index-page/${pageIndex}`
+      } else {
+        path = `${path}/index-page/${pageIndex}`
+      }
+    }
+    let categoriesFilter = [post.frontmatter.category]
+    if(post.frontmatter.category === siteMetadata.config.categoryNameForAll) {
+      categoriesFilter = categoriesList
+    }
+    createPage({
+      path: path,
+      component: `${template}?__contentFilePath=${post.internal.contentFilePath}`,
+      context: {
+        id: post.id,
+        slug: post.fields.slug,
+        categoriesList: categoriesFilter,
+        skip: i,
+        limit: limit,
+      }
+    })
+  }
+}
 
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
@@ -34,6 +65,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             date
             description
             category
+            layout
+            index
           }
           internal {
             contentFilePath
@@ -58,13 +91,40 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // `context` is available in the template as a prop and as a variable in GraphQL
 
   if (posts.length > 0) {
-    posts.forEach((post, index) => {
+    // aggregate posts by categories
+    const postsByCategory = posts.reduce((total, value) => {
+      const category = value.frontmatter.category || siteConfig.categoryNameForAll
+      if(total[category] === undefined) {
+        total[category] = []
+      }
+      total[category].push(value)
+      return total
+    }, {})
+    const categoriesList = Object.keys(postsByCategory)
+    categoriesList.forEach((key) => {
+      const post = postsByCategory[key].find((value) => {
+        return value.frontmatter.index == true
+      })
+      if(post === undefined){
+        return
+      }
+      const postCount = postsByCategory[key].length
+      createIndexPage({ actions, post, postCount , categoriesList })
+    })
+    
+    // page for each posts
+    posts.filter((post) => {
+      return post.frontmatter.index != true
+    }).forEach((post, index) => {
       const previousPostId = index === 0 ? null : posts[index - 1].id
       const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
 
+      // Define the template for blog post
+      const layout = post.frontmatter.layout || 'blog-post'
+      const template = path.resolve(`./src/templates/${layout}.js`)
       createPage({
         path: post.fields.slug,
-        component:`${blogPost}?__contentFilePath=${post.internal.contentFilePath}`,
+        component:`${template}?__contentFilePath=${post.internal.contentFilePath}`,
         // component: post.internal.contentFilePath,
         // component: blogPost,
         context: {
@@ -152,6 +212,45 @@ exports.createSchemaCustomization = ({ actions, schema, getNode, getNodesByType,
     headingsResolver,
   ])
 
+  // Frontmatter resolver
+  const frontmatterResolvers = schema.buildObjectType({
+    name: "Frontmatter",
+    fields: {
+      index: {
+        type: "Boolean",
+        resolve(source, args, context, info) {
+          if(source.index == null){
+            return false
+          }
+          return source.index
+        },
+      },
+      category: {
+        type: "String",
+        resolve(source, args, context, info) {
+          const { category } = source
+          if(source.category == null ) {
+            return siteMetadata.config.categoryNameForAll
+          }
+          return category
+        },
+      },
+      tags: {
+        type: "[String!]",
+        resolve(source, args, context, info) {
+          // For a more generic solution, you could pick the field value from
+          // `source[info.fieldName]`
+          const { tags } = source
+          if (source.tags == null || (Array.isArray(tags) && !tags.length)) {
+            return ["uncategorized"]
+          }
+          return tags
+        },
+      },
+    },
+  })
+  createTypes(frontmatterResolvers)
+
   // Explicitly define the siteMetadata {} object
   // This way those will always be defined even if removed from gatsby-config.js
 
@@ -163,6 +262,8 @@ exports.createSchemaCustomization = ({ actions, schema, getNode, getNodesByType,
       author: Author
       siteUrl: String
       social: Social
+      description: String
+      config: Config
     }
 
     type Author {
@@ -172,6 +273,12 @@ exports.createSchemaCustomization = ({ actions, schema, getNode, getNodesByType,
 
     type Social {
       twitter: String
+      github: String
+    }
+
+    type Config {
+      categoryNameForAll: String
+      paginationPageSize: Int
     }
 
     type MarkdownRemark implements Node {
@@ -189,8 +296,9 @@ exports.createSchemaCustomization = ({ actions, schema, getNode, getNodesByType,
       description: String
       date: Date @dateformat
       layout: String
+      index: Boolean
       category: String
-      tags: String
+      tags: [String]
     }
 
     type Fields {

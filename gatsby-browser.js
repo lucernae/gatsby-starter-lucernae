@@ -19,6 +19,5 @@ const addScript = (url) => {
 }
 
 export const wrapPageElement = ({element}) => {
-    console.log('wrapPage')
     addScript(`https://platform.twitter.com/widgets.js`)
 }

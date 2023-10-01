@@ -75,3 +75,6 @@ yarn-error.log
 # Nix related
 .direnv
 result
+
+# Jetbrains
+.idea

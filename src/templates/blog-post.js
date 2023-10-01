@@ -9,62 +9,82 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import NavigationPanel from "../components/navigation"
 
 const BlogPostTemplate = ({
-  data: {  previous, next, site, mdx: post },
+  data: { categories, previous, next, site, mdx: post },
   children,
   location,
 }) => {
   const siteTitle = site.siteMetadata?.title || `Title`
+  const navigationLinks = categories.nodes.map((value) => {
+    let category = value.frontmatter.category
+    if(category === site.siteMetadata.config.categoryNameForAll) {
+      category = ""
+    }
+    let linkPath = `/${category}/`
+    if(category === "") {
+      linkPath = "/"
+    }
+    return {
+      title: value.frontmatter.title,
+      link: linkPath
+    }
+  })
 
   return (
-    <Layout location={location} title={siteTitle}>
-      <article
-        className="blog-post"
-        itemScope
-        itemType="http://schema.org/Article"
-      >
-        <header>
-          <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
-        </header>
-        {/* <section
+    <div>
+      <NavigationPanel
+        location={location}
+        navigationLinks={navigationLinks}>{siteTitle}</NavigationPanel>
+      <Layout location={location} title={siteTitle}>
+        <article
+          className="blog-post"
+          itemScope
+          itemType="http://schema.org/Article"
+        >
+          <header>
+            <h1 itemProp="headline">{post.frontmatter.title}</h1>
+            <p>{post.frontmatter.date}</p>
+          </header>
+          {/* <section
           dangerouslySetInnerHTML={{ __html: post.html }}
           itemProp="articleBody"
         /> */}
-          { children }
-        <hr />
-        <footer>
-          <Bio />
-        </footer>
-      </article>
-      <nav className="blog-post-nav">
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
-          </li>
-        </ul>
-      </nav>
-    </Layout>
+          {children}
+          <hr />
+          <footer>
+            <Bio />
+          </footer>
+        </article>
+        <nav className="blog-post-nav">
+          <ul
+            style={{
+              display: `flex`,
+              flexWrap: `wrap`,
+              justifyContent: `space-between`,
+              listStyle: `none`,
+              padding: 0,
+            }}
+          >
+            <li>
+              {previous && (
+                <Link to={previous.fields.slug} rel="prev">
+                  ← {previous.frontmatter.title}
+                </Link>
+              )}
+            </li>
+            <li>
+              {next && (
+                <Link to={next.fields.slug} rel="next">
+                  {next.frontmatter.title} →
+                </Link>
+              )}
+            </li>
+          </ul>
+        </nav>
+      </Layout>
+    </div>
   )
 }
 
@@ -88,6 +108,25 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        config {
+          categoryNameForAll
+        }
+      }
+    }
+    categories: allMdx(
+      filter: {
+        frontmatter: {
+          index: {
+            eq: true
+          }
+        }
+      }
+    ) {
+      nodes {
+        frontmatter {
+          title
+          category
+        }
       }
     }
     mdx(fields: { slug: { eq: $slug } }) {
@@ -100,6 +139,8 @@ export const pageQuery = graphql`
         title
         date(formatString: "DD-MMM-YYYY")
         description
+        category
+        tags
       }
     }
     previous: mdx(id: { eq: $previousPostId }) {

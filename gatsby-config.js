@@ -30,24 +30,10 @@ module.exports = {
       twitter: `maulana_pcfre`,
       github: `lucernae`,
     },
-    navigationLinks: [
-      {
-        title: "All",
-        link: "/"
-      },
-      {
-        title: "Blogs",
-        link: "/blogs"
-      },
-      {
-        title: "Software Development",
-        link: "/soft-dev"
-      },
-      {
-        title: "Physics Notes",
-        link: "/physics"
-      },
-    ],
+    config: {
+      categoryNameForAll: "all",
+      paginationPageSize: 2,
+    },
   },
   plugins: [
     `gatsby-plugin-image`,

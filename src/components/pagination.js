@@ -6,7 +6,7 @@ import MenuIcon from "@mui/icons-material/Menu"
 
 import "katex/dist/katex.min.css"
 
-const NavigationPanel = ({ navigationLinks, children, location }) => {
+const Pagination = ({ navigationLinks, children, location }) => {
 
     const [anchorElNav, setAnchorElNav] = React.useState(
         null
@@ -18,14 +18,7 @@ const NavigationPanel = ({ navigationLinks, children, location }) => {
         setAnchorElNav(null);
     };
 
-    const currentLink = navigationLinks.find((value)=>{
-        if(value.link === "/"){
-            return false
-        }
-        return value.link === location.pathname || location.pathname.startsWith(value.link)
-    })
-
-    const [category, setCategory] = React.useState(currentLink?.link || location.pathname)
+    const [category, setCategory] = React.useState(navigationLinks[0].link)
     const handleCategoryChange = (event, newValue) => {
         setCategory(newValue)
     }
@@ -126,4 +119,4 @@ const NavigationPanel = ({ navigationLinks, children, location }) => {
     )
 }
 
-export default NavigationPanel
+export default Pagination
