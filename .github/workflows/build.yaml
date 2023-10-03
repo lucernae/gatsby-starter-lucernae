@@ -25,4 +25,4 @@ jobs:
       - name: Nix Build Base Images
         run: |
           nix develop --command yarn install
-          nix develop --command yarn gatsby-build
+          nix develop --command yarn build
