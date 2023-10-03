@@ -31,11 +31,9 @@ const IndexPostTemplate = ({
     }
     let linkPath = PathJoin("/", category.name, `index-page/${page}`)
     if (page === 1) {
-      console.log(PathJoin("/", category.name))
       navigate(PathJoin("/", category.name))
       return
     }
-    console.log(linkPath)
     navigate(linkPath)
     return
   }
