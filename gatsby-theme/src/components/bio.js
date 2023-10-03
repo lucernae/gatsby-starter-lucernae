@@ -26,22 +26,18 @@ const Bio = () => {
         }
       }
 
-      avatar: file (
-          relativePath: {
-            eq: "assets/avatar.png"
-          }
-        ) {
-          childImageSharp {
-            gatsbyImageData(
-              layout: FIXED
-              placeholder: BLURRED
-              formats: [AUTO, WEBP, AVIF]
-              width: 50
-              height: 50
-              quality: 95
-            )
-          }
+      avatar: file(relativePath: { eq: "assets/avatar.png" }) {
+        childImageSharp {
+          gatsbyImageData(
+            layout: FIXED
+            placeholder: BLURRED
+            formats: [AUTO, WEBP, AVIF]
+            width: 50
+            height: 50
+            quality: 95
+          )
         }
+      }
     }
   `)
 
@@ -51,10 +47,12 @@ const Bio = () => {
   const assetPath = data.site.siteMetadata?.assetPath
 
   return (
-    <div className="bio" style={{
-      display: `flex`,
-      marginBottom: rhythm(2.5),
-    }}
+    <div
+      className="bio"
+      style={{
+        display: `flex`,
+        marginBottom: rhythm(2.5),
+      }}
     >
       <GatsbyImage
         className="bio-avatar"
@@ -67,13 +65,18 @@ const Bio = () => {
           <br />
           {author?.summary || null}
           {` `}
-
           <br />
           <a href={`https://twitter.com/${social.twitter}`}>
-            <img alt="Twitter Follow" src={`https://img.shields.io/twitter/follow/${social.twitter}?style=social`}></img>
+            <img
+              alt="Twitter Follow"
+              src={`https://img.shields.io/twitter/follow/${social.twitter}?style=social`}
+            ></img>
           </a>
           <a href={`https://github.com/${social.github}`}>
-            <img alt="GitHub followers" src={`https://img.shields.io/github/followers/${social.github}?style=social`}></img>
+            <img
+              alt="GitHub followers"
+              src={`https://img.shields.io/github/followers/${social.github}?style=social`}
+            ></img>
           </a>
         </p>
       )}

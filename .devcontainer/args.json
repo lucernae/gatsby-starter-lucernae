@@ -1,6 +1,6 @@
 {
-    "useFlake": "true",
-    "useDirenv": "true",
-    "prebuildNixShell": "shell.nix",
-    "imageVariant": "flake---latest"
+  "useFlake": "true",
+  "useDirenv": "true",
+  "prebuildNixShell": "shell.nix",
+  "imageVariant": "flake---latest"
 }

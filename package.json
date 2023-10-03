@@ -3,7 +3,7 @@
     "scripts": {
         "build": "yarn workspace site build",
         "develop": "yarn workspace site develop",
-        "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,mdx}\"",
+        "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
         "start": "yarn workspace site develop",
         "serve": "yarn workspace site serve",
         "clean": "yarn workspace site clean",

@@ -7,19 +7,15 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import "@fontsource/roboto/300.css"
+import "@fontsource/roboto/400.css"
+import "@fontsource/roboto/500.css"
+import "@fontsource/roboto/700.css"
 import NavigationPanel, { GetNavigationLinks } from "../components/navigation"
 import { PathJoin } from "../utils/common"
 
 const IndexPostTemplate = ({
-  data: {
-    site,
-    post,
-    posts,
-  },
+  data: { site, post, posts },
   children,
   location,
 }) => {
@@ -27,27 +23,27 @@ const IndexPostTemplate = ({
   const navigationLinks = GetNavigationLinks()
   const handlePageChange = (event, page) => {
     let category = post.frontmatter.category
-    if(category === null) {
+    if (category === null) {
       category = {}
     }
-    if(category?.name === site.siteMetadata.config.categoryNameForAll) {
+    if (category?.name === site.siteMetadata.config.categoryNameForAll) {
       category.name = "/"
     }
     let linkPath = PathJoin("/", category.name, `index-page/${page}`)
-    if(page === 1) {
+    if (page === 1) {
       console.log(PathJoin("/", category.name))
       navigate(PathJoin("/", category.name))
       return
-    } 
+    }
     console.log(linkPath)
     navigate(linkPath)
     return
   }
   return (
     <div>
-      <NavigationPanel 
-        location={location}
-        navigationLinks={navigationLinks}>{siteTitle}</NavigationPanel>
+      <NavigationPanel location={location} navigationLinks={navigationLinks}>
+        {siteTitle}
+      </NavigationPanel>
       <Layout location={location} title={siteTitle}>
         <Bio />
         <article
@@ -92,12 +88,13 @@ const IndexPostTemplate = ({
               )
             })}
           </ol>
-          <Pagination 
-            page={posts.pageInfo.currentPage} 
+          <Pagination
+            page={posts.pageInfo.currentPage}
             hidePrevButton={!posts.pageInfo.hasPreviousPage}
-            hideNextButton={!posts.pageInfo.hasNextPage} 
-            count={posts.pageInfo.pageCount} 
-            onChange={handlePageChange}/>
+            hideNextButton={!posts.pageInfo.hasNextPage}
+            count={posts.pageInfo.pageCount}
+            onChange={handlePageChange}
+          />
         </article>
       </Layout>
     </div>
@@ -131,11 +128,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    post: mdx(
-      id: {
-        eq: $id
-      }
-    ) {
+    post: mdx(id: { eq: $id }) {
       id
       excerpt(pruneLength: 160)
       fields {
@@ -154,20 +147,10 @@ export const pageQuery = graphql`
     }
     posts: allMdx(
       filter: {
-        fields: { 
-          slug: { 
-            ne: $slug
-          } 
-        }
+        fields: { slug: { ne: $slug } }
         frontmatter: {
-          index: {
-            ne: true
-          }
-          category: {
-            name: {
-              in: $categoriesList
-            }
-          }
+          index: { ne: true }
+          category: { name: { in: $categoriesList } }
         }
       }
       skip: $skip

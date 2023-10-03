@@ -19,7 +19,7 @@ const wrapESMPlugin = name =>
  */
 module.exports = ({
   contentPath = `${__dirname}/content`,
-  assetPath = `${__dirname}/content/assets`
+  assetPath = `${__dirname}/content/assets`,
 }) => ({
   siteMetadata: {
     title: `Maulana's Gatsby Theme`,
@@ -65,8 +65,8 @@ module.exports = ({
           {
             resolve: `gatsby-remark-katex`,
             options: {
-              strict: `ignore`
-            }
+              strict: `ignore`,
+            },
           },
           `gatsby-remark-autolink-headers`,
           `gatsby-remark-prismjs`,

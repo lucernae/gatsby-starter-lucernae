@@ -9,21 +9,24 @@ const { createFilePath } = require(`gatsby-source-filesystem`)
 const slugify = require(`@sindresorhus/slugify`)
 const { compileMDXWithCustomOptions } = require(`gatsby-plugin-mdx`)
 const { remarkHeadingsPlugin } = require(`${__dirname}/remark-headings-plugin`)
-const { node } = require('prop-types')
+const { node } = require("prop-types")
 
-const createIndexPage = async ({actions, post, postCount, categoriesList}, options) => {
+const createIndexPage = async (
+  { actions, post, postCount, categoriesList },
+  options
+) => {
   const { createPage } = actions
   const limit = options.paginationPageSize
-  const layout = post.frontmatter.layout || 'index-post'
+  const layout = post.frontmatter.layout || "index-post"
   const template = path.resolve(`${__dirname}/src/templates/${layout}.js`)
-  for(let i=0; i<postCount; i+=limit) {
+  for (let i = 0; i < postCount; i += limit) {
     let pagePath = post.fields.slug
-    if(i!=0){
-      let pageIndex = Math.floor(i/limit) + 1
+    if (i != 0) {
+      let pageIndex = Math.floor(i / limit) + 1
       pagePath = path.join(pagePath, "index-page", pageIndex)
     }
     let categoriesFilter = [post.frontmatter.category.name]
-    if(post.frontmatter.category.name === options.categoryNameForAll) {
+    if (post.frontmatter.category.name === options.categoryNameForAll) {
       categoriesFilter = categoriesList
     }
     createPage({
@@ -35,7 +38,7 @@ const createIndexPage = async ({actions, post, postCount, categoriesList}, optio
         categoriesList: categoriesFilter,
         skip: i,
         limit: limit,
-      }
+      },
     })
   }
 }
@@ -92,48 +95,52 @@ exports.createPages = async ({ graphql, actions, reporter }, options) => {
   if (posts.length > 0) {
     // aggregate posts by categories
     const postsByCategory = posts.reduce((total, value) => {
-      const category = value.frontmatter.category.name || options.categoryNameForAll
-      if(total[category] === undefined) {
+      const category =
+        value.frontmatter.category.name || options.categoryNameForAll
+      if (total[category] === undefined) {
         total[category] = []
       }
       total[category].push(value)
       return total
     }, {})
     const categoriesList = Object.keys(postsByCategory)
-    categoriesList.forEach((key) => {
-      const post = postsByCategory[key].find((value) => {
+    categoriesList.forEach(key => {
+      const post = postsByCategory[key].find(value => {
         return value.frontmatter.index == true
       })
-      if(post === undefined){
+      if (post === undefined) {
         return
       }
       const postCount = postsByCategory[key].length
-      createIndexPage({ actions, post, postCount , categoriesList }, options)
+      createIndexPage({ actions, post, postCount, categoriesList }, options)
     })
-    
-    // page for each posts
-    posts.filter((post) => {
-      return post.frontmatter.index != true
-    }).forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
 
-      // Define the template for blog post
-      const layout = post.frontmatter.layout || 'blog-post'
-      const template = path.resolve(`${__dirname}/src/templates/${layout}.js`)
-      createPage({
-        path: post.fields.slug,
-        component:`${template}?__contentFilePath=${post.internal.contentFilePath}`,
-        // component: post.internal.contentFilePath,
-        // component: blogPost,
-        context: {
-          id: post.id,
-          slug: post.fields.slug,
-          previousPostId,
-          nextPostId,
-        },
+    // page for each posts
+    posts
+      .filter(post => {
+        return post.frontmatter.index != true
       })
-    })
+      .forEach((post, index) => {
+        const previousPostId = index === 0 ? null : posts[index - 1].id
+        const nextPostId =
+          index === posts.length - 1 ? null : posts[index + 1].id
+
+        // Define the template for blog post
+        const layout = post.frontmatter.layout || "blog-post"
+        const template = path.resolve(`${__dirname}/src/templates/${layout}.js`)
+        createPage({
+          path: post.fields.slug,
+          component: `${template}?__contentFilePath=${post.internal.contentFilePath}`,
+          // component: post.internal.contentFilePath,
+          // component: blogPost,
+          context: {
+            id: post.id,
+            slug: post.fields.slug,
+            previousPostId,
+            nextPostId,
+          },
+        })
+      })
   }
 }
 
@@ -157,7 +164,7 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
   actions.setWebpackConfig({
     resolve: {
       fallback: {
-        "path": require.resolve("path-browserify"),
+        path: require.resolve("path-browserify"),
       },
     },
   })
@@ -166,7 +173,19 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
 /**
  * @type {import('gatsby').GatsbyNode['createSchemaCustomization']}
  */
-exports.createSchemaCustomization = ({ actions, schema, getNode, getNodesByType, pathPrefix, reporter, cache, store }, options) => {
+exports.createSchemaCustomization = (
+  {
+    actions,
+    schema,
+    getNode,
+    getNodesByType,
+    pathPrefix,
+    reporter,
+    cache,
+    store,
+  },
+  options
+) => {
   const { createTypes } = actions
 
   const headingsResolver = schema.buildObjectType({
@@ -207,9 +226,9 @@ exports.createSchemaCustomization = ({ actions, schema, getNode, getNodesByType,
           }
 
           return result.metadata.headings
-        }
-      }
-    }
+        },
+      },
+    },
   })
   createTypes([
     `
@@ -228,7 +247,7 @@ exports.createSchemaCustomization = ({ actions, schema, getNode, getNodesByType,
       index: {
         type: "Boolean",
         resolve(source, args, context, info) {
-          if(source.index == null){
+          if (source.index == null) {
             return false
           }
           return source.index
@@ -238,14 +257,14 @@ exports.createSchemaCustomization = ({ actions, schema, getNode, getNodesByType,
         type: "Category",
         resolve(source, args, context, info) {
           const { category } = source
-          if(source.category === null) {
+          if (source.category === null) {
             return {
               name: options.categoryNameForAll,
               index: 0,
               depth: 0,
             }
           }
-          if(source.category.name === null) {
+          if (source.category.name === null) {
             category.name = options.categoryNameForAll
           }
           return category

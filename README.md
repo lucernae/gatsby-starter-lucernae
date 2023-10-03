@@ -8,7 +8,7 @@ Current features:
 
 - Support for MDX
 
-
 Syntax supported:
+
 - Markdown
 - MDX

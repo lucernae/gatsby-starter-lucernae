@@ -10,14 +10,13 @@ import "./src/style.css"
 import "prismjs/themes/prism.css"
 import "./src/styles/global.css"
 
-
-const addScript = (url) => {
-    const script = document.createElement('script')
-    script.async = true
-    script.src = url
-    document.body.appendChild(script)
+const addScript = url => {
+  const script = document.createElement("script")
+  script.async = true
+  script.src = url
+  document.body.appendChild(script)
 }
 
-export const wrapPageElement = ({element}) => {
-    addScript(`https://platform.twitter.com/widgets.js`)
+export const wrapPageElement = ({ element }) => {
+  addScript(`https://platform.twitter.com/widgets.js`)
 }
