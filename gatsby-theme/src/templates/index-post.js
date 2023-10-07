@@ -54,6 +54,13 @@ const IndexPostTemplate = ({
           </header>
           {children}
           <hr />
+          <Pagination
+            page={posts.pageInfo.currentPage}
+            hidePrevButton={!posts.pageInfo.hasPreviousPage}
+            hideNextButton={!posts.pageInfo.hasNextPage}
+            count={posts.pageInfo.pageCount}
+            onChange={handlePageChange}
+            />
           <ol style={{ listStyle: `none` }}>
             {posts.nodes.map(post => {
               const title = post.frontmatter.title || post.fields.slug
@@ -151,6 +158,20 @@ export const pageQuery = graphql`
           category: { name: { in: $categoriesList } }
         }
       }
+      sort: [
+        {
+          frontmatter: {
+            date: DESC
+          }
+        }
+        {
+          frontmatter: {
+            category: {
+              index: ASC
+            }
+          }
+        }
+      ]
       skip: $skip
       limit: $limit
     ) {
