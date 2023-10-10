@@ -23,7 +23,7 @@ const createIndexPage = async (
     let pagePath = post.fields.slug
     if (i != 0) {
       let pageIndex = Math.floor(i / limit) + 1
-      pagePath = path.join(pagePath, "index-page", pageIndex)
+      pagePath = path.join(pagePath, `index-page/${pageIndex}`)
     }
     let categoriesFilter = [post.frontmatter.category.name]
     if (post.frontmatter.category.name === options.categoryNameForAll) {

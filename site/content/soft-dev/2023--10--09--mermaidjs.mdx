@@ -1,0 +1,65 @@
+---
+title: MermaidJS
+description: MermaidJS example
+date: 2023-10-09T00:00:00
+category: 
+    name: blogs
+layout: blog-post
+---
+
+# Mermaid
+
+## flowchart
+
+```mermaid
+flowchart
+    start --> finish
+```
+
+````markdown
+```mermaid
+flowchart
+    start --> finish
+```
+````
+
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart LR
+    markdown["`This **is** _Markdown_`"]
+    newLines["`Line1
+    Line 2
+    Line 3`"]
+    markdown --> newLines
+```
+
+````markdown
+```mermaid
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
+flowchart LR
+    markdown["`This **is** _Markdown_`"]
+    newLines["`Line1
+    Line 2
+    Line 3`"]
+    markdown --> newLines
+```
+````
+
+## Sequence Diagram
+
+```mermaid
+sequenceDiagram
+    Alice->>John: Hello John, how are you?
+    John-->>Alice: Great!
+    Alice-)John: See you later!
+```
+
+````markdown
+```mermaid
+sequenceDiagram
+    Alice->>John: Hello John, how are you?
+    John-->>Alice: Great!
+    Alice-)John: See you later!
+```
+````
+

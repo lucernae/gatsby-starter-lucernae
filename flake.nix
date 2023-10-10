@@ -71,6 +71,7 @@
           packages = [
             # (pkgs.writeShellScriptBin "node" ''exec -a node bun "$@"'')
             # (pkgs.writeShellScriptBin "yarn" ''exec -a yarn bun "$@"'')
+            pkgs.getconf
            ];
           env = [
             {
