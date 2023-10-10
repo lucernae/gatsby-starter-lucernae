@@ -4,6 +4,7 @@ description: Markdown example
 date: 2023-09-09T00:00:00
 category: 
     name: blogs
+layout: blog-post
 ---
 
 # Markdown
@@ -313,13 +314,16 @@ Or <s>strike thru</s>
 A collapsible section can be made using `<details>` and `<summary>` tags. Like this:
 
 <details>
-
 <summary>Click Me!</summary>
+
 This is the details with valid **Markdown**
+
+Leave newline after the tag to format content as MDX.
 
 ```python
 print('Hello world')
 ```
+
 </details>
 
 ````markdown
@@ -327,10 +331,14 @@ A collapsible section can be made using `<details>` and `<summary>` tags. Like t
 
 <details>
 <summary>Click Me!</summary>
-This is the details with valid **Markdown**
+
+This is the details with valid **Markdown**.
+
+Leave newline after the tag to format content as MDX.
 
 ```python
 print('Hello world')
 ```
+
 </details>
 ````

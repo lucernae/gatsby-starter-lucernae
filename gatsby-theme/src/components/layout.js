@@ -11,17 +11,17 @@ const Layout = ({ location, title, children }) => {
   const shortcodes = { GeoGebra }
 
   return (
-<MDXProvider
+    <MDXProvider
       components={shortcodes}>
-    <div className="global-wrapper" data-is-root-path={isRootPath}>
-      <main>{children}</main>
-      <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
-      </footer>
-    </div>
-</MDXProvider>
+      <div className="global-wrapper" data-is-root-path={isRootPath}>
+        <main>{children}</main>
+        <footer>
+          © {new Date().getFullYear()}, Built with
+          {` `}
+          <a href="https://www.gatsbyjs.com">Gatsby</a>
+        </footer>
+      </div>
+    </MDXProvider>
   )
 }
 
