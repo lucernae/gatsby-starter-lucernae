@@ -1,6 +1,8 @@
 import * as React from "react"
+import { Script } from "gatsby"
 import { MDXProvider } from "@mdx-js/react"
 import GeoGebra from "./geogebra"
+import Mermaid, { MermaidModule } from "./mermaid"
 
 // import { rhythm, scale } from "../utils/typography"
 import "katex/dist/katex.min.css"
@@ -8,7 +10,7 @@ import "katex/dist/katex.min.css"
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
   const isRootPath = location.pathname === rootPath
-  const shortcodes = { GeoGebra }
+  const shortcodes = { GeoGebra, Mermaid }
 
   return (
     <MDXProvider
@@ -21,6 +23,7 @@ const Layout = ({ location, title, children }) => {
           <a href="https://www.gatsbyjs.com">Gatsby</a>
         </footer>
       </div>
+      <MermaidModule/>
     </MDXProvider>
   )
 }

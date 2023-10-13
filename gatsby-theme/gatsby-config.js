@@ -50,16 +50,7 @@ module.exports = ({
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
           {
-            resolve: `gatsby-remark-mermaid`,
-            options: {
-              svgo: {
-                plugins: [{ name: 'removeTitle', active: false }]
-              },
-              mermaidOptions: {
-                theme: 'neutral',
-                themeCSS: '.node rect { fill: #fff; }'
-              }
-            },
+            resolve: require.resolve(`${__dirname}/plugins/gatsby-remark-mermaid-client`)
           },
           {
             resolve: `gatsby-remark-images`,
