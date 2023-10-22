@@ -19,7 +19,7 @@ module.exports = {
           repoId:"R_kgDOKRTVcw",
           category: "Announcements",
           categoryId: "DIC_kwDOKRTVc84CaVF-",
-          mapping: "pathname",
+          mapping: "url",
           strict: "0",
           reactionsEnabled: "1",
           emitMetadata: "1",
