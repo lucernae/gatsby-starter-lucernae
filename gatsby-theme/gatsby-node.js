@@ -101,8 +101,13 @@ exports.createPages = async ({ graphql, actions, reporter }, options) => {
         total[category] = []
       }
       total[category].push(value)
+      if(category != options.categoryNameForAll) {
+        total[options.categoryNameForAll].push(value)
+      }
       return total
-    }, {})
+    }, {
+      [options.categoryNameForAll]: []
+    })
     const categoriesList = Object.keys(postsByCategory)
     categoriesList.forEach(key => {
       const post = postsByCategory[key].find(value => {
