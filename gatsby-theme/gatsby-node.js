@@ -283,6 +283,18 @@ exports.createSchemaCustomization = (
           return tags
         },
       },
+      comments: {
+        type: "Boolean",
+        resolve(source, args, context, info) {
+          // For a more generic solution, you could pick the field value from
+          // `source[info.fieldName]`
+          const { comments } = source
+          if (source.comments == null || comments == null) {
+            return options.commentsEnabled
+          }
+          return comments
+        },
+      }
     },
   })
   createTypes(frontmatterResolvers)
@@ -337,6 +349,7 @@ exports.createSchemaCustomization = (
       index: Boolean
       category: Category
       tags: [String]
+      comments: Boolean
     }
 
     type Category {
