@@ -5868,6 +5868,28 @@ gatsby-core-utils@^4.12.0:
     tmp "^0.2.1"
     xdg-basedir "^4.0.0"
 
+gatsby-core-utils@^4.13.0:
+  version "4.13.0"
+  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-4.13.0.tgz#b286d9a5f31363d5264114b724a8d122850df2cd"
+  integrity sha512-+oJJsADfcEnzpQpof+L5qtP4iSeMaEPn1QSjXENlg/go9Pi/4eqb+Nn3y3q8bC/zy4hMWFWrPdMJmdW581uNvA==
+  dependencies:
+    "@babel/runtime" "^7.20.13"
+    ci-info "2.0.0"
+    configstore "^5.0.1"
+    fastq "^1.15.0"
+    file-type "^16.5.4"
+    fs-extra "^11.1.1"
+    got "^11.8.6"
+    hash-wasm "^4.9.0"
+    import-from "^4.0.0"
+    lmdb "2.5.3"
+    lock "^1.1.0"
+    node-object-hash "^2.3.10"
+    proper-lockfile "^4.1.2"
+    resolve-from "^5.0.0"
+    tmp "^0.2.1"
+    xdg-basedir "^4.0.0"
+
 gatsby-graphiql-explorer@^3.12.1:
   version "3.12.1"
   resolved "https://registry.yarnpkg.com/gatsby-graphiql-explorer/-/gatsby-graphiql-explorer-3.12.1.tgz#7ea2196467d5982bc3fb8e0326cd57161bc1b8c6"
@@ -6029,10 +6051,10 @@ gatsby-plugin-postcss@^6.3.0:
     "@babel/runtime" "^7.20.13"
     postcss-loader "^7.3.3"
 
-gatsby-plugin-sharp@^5.8.1:
-  version "5.12.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-5.12.0.tgz#a88a35895c70500b487699b0cc9a21aa58f440c5"
-  integrity sha512-of9E26/eLenTgNUjzFYJGbwIIGoXRCOCA1Dsz7dKvcx11b0pNf27C65AiEWPudWXHl+OUjFX/bNNBBooqN+nlg==
+gatsby-plugin-sharp@^5.13.0:
+  version "5.13.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-5.13.0.tgz#a84fabbbd211256c65f8dbd079fd10a89a63fa86"
+  integrity sha512-mechLDYE5dIo5n1rC3VtmqEtrts9v1136Yq6S3i2vUyW9ZhEgsMo4XXxKmF6g/SoYgN9AWevXE4XsCByFpMsMA==
   dependencies:
     "@babel/runtime" "^7.20.13"
     async "^3.2.4"
@@ -6040,12 +6062,12 @@ gatsby-plugin-sharp@^5.8.1:
     debug "^4.3.4"
     filenamify "^4.3.0"
     fs-extra "^11.1.1"
-    gatsby-core-utils "^4.12.0"
-    gatsby-plugin-utils "^4.12.0"
+    gatsby-core-utils "^4.13.0"
+    gatsby-plugin-utils "^4.13.0"
     lodash "^4.17.21"
     probe-image-size "^7.2.3"
     semver "^7.5.3"
-    sharp "^0.32.1"
+    sharp "^0.32.6"
 
 gatsby-plugin-typescript@^5.12.0:
   version "5.12.0"
@@ -6077,6 +6099,21 @@ gatsby-plugin-utils@^4.12.0:
     fs-extra "^11.1.1"
     gatsby-core-utils "^4.12.0"
     gatsby-sharp "^1.12.0"
+    graphql-compose "^9.0.10"
+    import-from "^4.0.0"
+    joi "^17.9.2"
+    mime "^3.0.0"
+
+gatsby-plugin-utils@^4.13.0:
+  version "4.13.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-utils/-/gatsby-plugin-utils-4.13.0.tgz#7715055942161fc20e4cc9e90c42cae15c0ff6b9"
+  integrity sha512-3qwhM6mUYjorRiD0D0cgmCHcKwroG2d4PlfErnapHJpM/ISGfdBBOfRhPyk2N0u3dbGeb3KQq5gImCCS73bvxg==
+  dependencies:
+    "@babel/runtime" "^7.20.13"
+    fastq "^1.15.0"
+    fs-extra "^11.1.1"
+    gatsby-core-utils "^4.13.0"
+    gatsby-sharp "^1.13.0"
     graphql-compose "^9.0.10"
     import-from "^4.0.0"
     joi "^17.9.2"
@@ -6183,6 +6220,13 @@ gatsby-sharp@^1.12.0:
   integrity sha512-5MbTPKfzkOCtwT74+FZTUFKaul/2UyF10apvMcmIKomq71/jHf6wJx+rHtSdgyq19r4VWL8DGG2CKgSpe0z9GQ==
   dependencies:
     sharp "^0.32.1"
+
+gatsby-sharp@^1.13.0:
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/gatsby-sharp/-/gatsby-sharp-1.13.0.tgz#4d55d877ed3a5c9cd7ac45f27e13d07acb99993b"
+  integrity sha512-DviUtgm7tatSd1Hm54o/orHimOcyXBO9OJkSfzEchPFClvOza+2Qe/lqZShio0gFDxmG0Jgn0XCLzG7uH5VyJQ==
+  dependencies:
+    sharp "^0.32.6"
 
 gatsby-source-filesystem@^5.3.1:
   version "5.12.0"
@@ -11162,7 +11206,7 @@ shallow-compare@^1.2.2:
   resolved "https://registry.yarnpkg.com/shallow-compare/-/shallow-compare-1.2.2.tgz#fa4794627bf455a47c4f56881d8a6132d581ffdb"
   integrity sha512-LUMFi+RppPlrHzbqmFnINTrazo0lPNwhcgzuAXVVcfy/mqPDrQmHAyz5bvV0gDAuRFrk804V0HpQ6u9sZ0tBeg==
 
-sharp@^0.32.1:
+sharp@^0.32.1, sharp@^0.32.6:
   version "0.32.6"
   resolved "https://registry.yarnpkg.com/sharp/-/sharp-0.32.6.tgz#6ad30c0b7cd910df65d5f355f774aa4fce45732a"
   integrity sha512-KyLTWwgcR9Oe4d9HwCwNM2l7+J0dUQwn/yf7S0EnTtb0eVS4RxO0eUSvxPtzT4F3SY+C4K6fqdv/DO27sJ/v/w==
