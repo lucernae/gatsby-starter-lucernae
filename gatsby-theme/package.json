@@ -19,7 +19,7 @@
     "@mdx-js/react": "^2.2.1",
     "@mui/icons-material": "^5.14.8",
     "@mui/material": "^5.14.8",
-    "@sindresorhus/slugify": "^1",
+    "@sindresorhus/slugify": "^2.0.0",
     "autoprefixer": "^10.4.13",
     "gatsby": "^5.3.3",
     "gatsby-plugin-feed": "^5.3.1",
