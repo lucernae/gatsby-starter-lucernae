@@ -1,4 +1,4 @@
-require("dotenv").config()
+require(`dotenv`).config()
 
 const gatsbyThemeConfig = require(`../gatsby-theme/gatsby-config.js`)
 
@@ -49,8 +49,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-algolia`,
       options: {
-        appId: process.env.GATSBY_ALGOLIA_APP_ID,
-        apiKey: process.env.ALGOLIA_ADMIN_KEY,
+        appId: process.env.GATSBY_ALGOLIA_APP_ID ?? '',
+        apiKey: process.env.GATSBY_ALGOLIA_WRITE_KEY ?? '',
         dryRun: process.env.GATSBY_ALGOLIA_DRY_RUN === 'true',
         continueOnFailure: process.env.GATSBY_ALGOLIA_CONTINUE_ON_FAILURE === 'true',
         queries: require("../gatsby-theme/src/utils/algolia-queries")
