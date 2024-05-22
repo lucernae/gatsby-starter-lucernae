@@ -1,6 +1,7 @@
 require(`dotenv`).config()
 
 const gatsbyThemeConfig = require(`../gatsby-theme/gatsby-config.js`)
+const algoliaIndexName = `Pages_${process.env.DEPLOY_ENVIRONMENT ?? 'testing'}`
 
 module.exports = {
   siteMetadata: {
@@ -30,6 +31,9 @@ module.exports = {
           lang: "en",
           loading: "lazy",
         },
+        algoliaProps: {
+          indexName: algoliaIndexName,
+        },
       },
     },
     {
@@ -53,7 +57,16 @@ module.exports = {
         apiKey: process.env.GATSBY_ALGOLIA_WRITE_KEY ?? '',
         dryRun: process.env.GATSBY_ALGOLIA_DRY_RUN === 'true',
         continueOnFailure: process.env.GATSBY_ALGOLIA_CONTINUE_ON_FAILURE === 'true',
-        queries: require("../gatsby-theme/src/utils/algolia-queries")
+        queries: (() => {
+          const q = require("../gatsby-theme/src/utils/algolia-queries")
+          return q.map((item) => {
+            const result = {
+              ...item,
+              indexName: algoliaIndexName,
+            }
+            return result
+          })
+        })(),
       }
     },
   ],
