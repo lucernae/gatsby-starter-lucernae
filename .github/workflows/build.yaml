@@ -27,6 +27,7 @@ jobs:
       - name: Nix Build Base Images
         env:
           GATSBY_ALGOLIA_DRY_RUN: true
+          GATSBY_ALGOLIA_CONTINUE_ON_FAILURE: true
         run: |
           nix develop --command yarn install
           nix develop --command yarn build

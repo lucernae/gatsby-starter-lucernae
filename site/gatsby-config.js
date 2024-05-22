@@ -52,6 +52,7 @@ module.exports = {
         appId: process.env.GATSBY_ALGOLIA_APP_ID,
         apiKey: process.env.ALGOLIA_ADMIN_KEY,
         dryRun: process.env.GATSBY_ALGOLIA_DRY_RUN === 'true',
+        continueOnFailure: process.env.GATSBY_ALGOLIA_CONTINUE_ON_FAILURE === 'true',
         queries: require("../gatsby-theme/src/utils/algolia-queries")
       }
     },
