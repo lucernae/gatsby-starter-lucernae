@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 const gatsbyThemeConfig = require(`../gatsby-theme/gatsby-config.js`)
 
 module.exports = {
@@ -10,7 +12,7 @@ module.exports = {
       resolve: "gatsby-theme",
       options: {
         categoryNameForAll: "all",
-        paginationPageSize: 2,
+        paginationPageSize: 10,
         contentPath: `${__dirname}/content`,
         assetPath: `${__dirname}/content/assets`,
         commentsEnabled: true,
@@ -43,6 +45,14 @@ module.exports = {
         path: `${__dirname}/content/assets`,
         name: `assets`,
       },
+    },
+    {
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: process.env.GATSBY_ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_ADMIN_KEY,
+        queries: require("../gatsby-theme/src/utils/algolia-queries")
+      }
     },
   ],
 }

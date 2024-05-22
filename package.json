@@ -3,6 +3,7 @@
     "scripts": {
         "clean-node-modules": "rm -rf node_modules gatsby-theme/node_modules site/node_modules",
         "clean-develop": "yarn workspace site clean && yarn workspace site develop",
+        "clean-build": "yarn workspace site clean && yarn workspace site build",
         "setup": "yarn workspace gatsby-theme playwright install --with-deps chromium",
         "build": "yarn workspace site build",
         "develop": "yarn workspace site develop",
