@@ -51,6 +51,7 @@ module.exports = {
       options: {
         appId: process.env.GATSBY_ALGOLIA_APP_ID,
         apiKey: process.env.ALGOLIA_ADMIN_KEY,
+        dryRun: process.env.GATSBY_ALGOLIA_DRY_RUN === 'true',
         queries: require("../gatsby-theme/src/utils/algolia-queries")
       }
     },

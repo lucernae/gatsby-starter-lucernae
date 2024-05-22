@@ -25,6 +25,8 @@ jobs:
             experimental-features = nix-command flakes
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: Nix Build Base Images
+        env:
+          GATSBY_ALGOLIA_DRY_RUN: true
         run: |
           nix develop --command yarn install
           nix develop --command yarn build
