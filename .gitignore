@@ -74,6 +74,7 @@ yarn-error.log
 
 # Nix related
 .direnv
+.venv
 result
 
 # Jetbrains

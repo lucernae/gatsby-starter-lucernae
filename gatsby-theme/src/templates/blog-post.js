@@ -12,7 +12,7 @@ import "@fontsource/roboto/700.css"
 import NavigationPanel, { GetNavigationLinks } from "../components/navigation"
 
 const BlogPostTemplate = ({
-  data: { previous, next, site, mdx: post },
+  data: { previous, next, site, mdx: post, fitFile },
   children,
   location,
 }) => {
@@ -117,6 +117,18 @@ export const pageQuery = graphql`
           algoliaProps {
             indexName
           }
+        }
+      }
+    }
+    fitFile: allFile(filter: {
+      ext: {
+        eq: ".fit"
+      }
+    }) {
+      nodes {
+        ext
+        internal {
+          content
         }
       }
     }
