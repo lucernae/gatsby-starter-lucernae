@@ -6,7 +6,6 @@ export class FITReader {
     this.mesgListener = mesgListener
     this.decoder = null
     this.fitData = null
-    // const fitBuffer = fs.readFileSync(this.filePath)
     this.decoderReady = fetch(this.filePath)
       .then((response) => response.arrayBuffer())
       .then((buffer) => {

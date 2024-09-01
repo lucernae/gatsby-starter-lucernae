@@ -11,7 +11,15 @@ import {
 import { LineChart, ScatterChart } from "@mui/x-charts"
 import { createContext, useContext, useEffect, useState } from "react"
 import moment from "moment"
-import Plot from "react-plotly.js"
+import Loadable from "react-loadable"
+
+const LoadablePlotlyPlot = Loadable({
+  loader: () => import("react-plotly.js"),
+  loading() {
+    return <div>Loading...</div>
+  }
+})
+
 
 export const FITDataContext = createContext()
 
@@ -21,8 +29,13 @@ export const FITDataProvider = (
     children,
   }
 ) => {
-  const [fitReader, setFitReader] = useState(new FITReader(fitFile))
+  const [fitReader, setFitReader] = useState(null)
   const [fitData, setFitData] = useState(null)
+  useEffect(() =>{
+    if(typeof window !== 'undefined') {
+      setFitReader(new FITReader(fitFile))
+    }
+  },[])
   useEffect(() => {
     const fetchData = async () => {
       if(!fitReader) {
@@ -33,7 +46,7 @@ export const FITDataProvider = (
     }
 
     fetchData()
-  }, [])
+  }, [fitReader])
   return (
     <FITDataContext.Provider value={{
       fitReader, fitData,
@@ -163,7 +176,7 @@ export const HeartRateViewer = (
       height={height || 300}
     />
   }
-  return <Plot
+  return <LoadablePlotlyPlot
     data={[
       {
         x: chartData.xAxis,
@@ -279,7 +292,7 @@ export const PaceViewer = (
       height={height || 300}
     />
   }
-  return <Plot
+  return <LoadablePlotlyPlot
     data={[
       {
         x: chartData.xAxis,
@@ -392,7 +405,7 @@ export const CadenceViewer = (
       height={height || 300}
     />
   }
-  return <Plot
+  return <LoadablePlotlyPlot
     data={[
       {
         x: chartData.xAxis,
