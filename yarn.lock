@@ -1529,24 +1529,24 @@
   integrity sha512-fTvrteVzuFUePhr4QYBGoK8G/YHLJ3IhF1HhKg0AxcFvZajJT7rM7ULdmKLSd2PkX44R3aaFZq1zDbmjbGGI+w==
 
 "@fontsource/roboto@^5.0.8":
-  version "5.0.8"
-  resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-5.0.8.tgz#613b477a56f21b5705db1a67e995c033ef317f76"
-  integrity sha512-XxPltXs5R31D6UZeLIV1td3wTXU3jzd3f2DLsXI8tytMGBkIsGcc9sIyiupRtA8y73HAhuSCeweOoBqf6DbWCA==
+  version "5.2.10"
+  resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-5.2.10.tgz#b985d34de475913b41d0fb57e2dcd0b16ab9ecb5"
+  integrity sha512-8HlA5FtSfz//oFSr2eL7GFXAiE7eIkcGOtx7tjsLKq+as702x9+GU7K95iDeWFapHC4M2hv9RrpXKRTGGBI8Zg==
 
 "@garmin/fitsdk@^21.141.0":
-  version "21.141.0"
-  resolved "https://registry.yarnpkg.com/@garmin/fitsdk/-/fitsdk-21.141.0.tgz#8e506b0e792df5d23246942720fc67965b4fbfe8"
-  integrity sha512-bUn7Q1YxetDImfJNKgMltkDROHhMQ6imutjVScjqmTY//le6ZTtdakq9qp+VlqZO/nQPDCL9bAOtKgnbvsFC+w==
+  version "21.194.0"
+  resolved "https://registry.yarnpkg.com/@garmin/fitsdk/-/fitsdk-21.194.0.tgz#06a67b701869d011ea9cf0f835742b5f91d1bf53"
+  integrity sha512-YDS2bamEqcDhlFN0paM4qhPwiO91A9qDUQa5evE7S/+KEpmIzTsHFuF056epQQgn/i4MMnPr1tz9uaeBy8eJjA==
 
 "@gatsbyjs/parcel-namer-relative-to-cwd@^2.13.1":
-  version "2.13.1"
-  resolved "https://registry.yarnpkg.com/@gatsbyjs/parcel-namer-relative-to-cwd/-/parcel-namer-relative-to-cwd-2.13.1.tgz#79d2692330a942394200c9bf3e820a4e55075ffb"
-  integrity sha512-ze0u/CAt6fKV2yQlExkBARi8oqA559lX6/GFWwdtD9S1J4h8Bje70Odl/bcIECvT/w9mWCCQEVtKLvqkraDopw==
+  version "2.16.0"
+  resolved "https://registry.yarnpkg.com/@gatsbyjs/parcel-namer-relative-to-cwd/-/parcel-namer-relative-to-cwd-2.16.0.tgz#f84b5cd5d80079342febb954cf2219e02723ab52"
+  integrity sha512-E05myRVDUgUXS41wWxBOc0wPub1WAty3M6bO2vGctToXO11Lw9tci9banlSQojBB12ExsmRqNW90FxtVNTbfQA==
   dependencies:
     "@babel/runtime" "^7.20.13"
     "@parcel/namer-default" "2.8.3"
     "@parcel/plugin" "2.8.3"
-    gatsby-core-utils "^4.13.1"
+    gatsby-core-utils "^4.16.0"
 
 "@gatsbyjs/reach-router@^2.0.1":
   version "2.0.1"
@@ -6969,6 +6969,15 @@ fs-extra@^11.1.1:
     jsonfile "^6.0.1"
     universalify "^2.0.0"
 
+fs-extra@^11.2.0:
+  version "11.3.3"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.3.3.tgz#a27da23b72524e81ac6c3815cc0179b8c74c59ee"
+  integrity sha512-VWSRii4t0AFm6ixFFmLLx1t7wS1gh+ckoa84aOeapGum0h+EZd1EhEumSB+ZdDLnEPuucsVB9oB7cxJHap6Afg==
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^2.0.0"
+
 fs-extra@^9.0.0:
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-9.1.0.tgz#5954460c764a8da2094ba3554bf839e6b9a7c86d"
@@ -7079,6 +7088,28 @@ gatsby-core-utils@^4.13.1:
     fs-extra "^11.1.1"
     got "^11.8.6"
     hash-wasm "^4.9.0"
+    import-from "^4.0.0"
+    lmdb "2.5.3"
+    lock "^1.1.0"
+    node-object-hash "^2.3.10"
+    proper-lockfile "^4.1.2"
+    resolve-from "^5.0.0"
+    tmp "^0.2.1"
+    xdg-basedir "^4.0.0"
+
+gatsby-core-utils@^4.16.0:
+  version "4.16.0"
+  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-4.16.0.tgz#31ec88ab51272bb8a58535505633a57e8c069899"
+  integrity sha512-QCZ9BmQp3YyYxH0Wf4bofayL3vJnayqSvsBUAhKXGh/Os0fn1KMNyAjPLnW+zrGFQaK05Vjdlp99I/Wnc3M33A==
+  dependencies:
+    "@babel/runtime" "^7.20.13"
+    ci-info "2.0.0"
+    configstore "^5.0.1"
+    fastq "^1.15.0"
+    file-type "^16.5.4"
+    fs-extra "^11.2.0"
+    got "^11.8.6"
+    hash-wasm "^4.11.0"
     import-from "^4.0.0"
     lmdb "2.5.3"
     lock "^1.1.0"
@@ -8222,6 +8253,11 @@ has@^1.0.3:
   integrity sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
   dependencies:
     function-bind "^1.1.1"
+
+hash-wasm@^4.11.0:
+  version "4.12.0"
+  resolved "https://registry.yarnpkg.com/hash-wasm/-/hash-wasm-4.12.0.tgz#f9f1a9f9121e027a9acbf6db5d59452ace1ef9bb"
+  integrity sha512-+/2B2rYLb48I/evdOIhP+K/DD2ca2fgBjp6O+GBEnCDk2e4rpeXIK8GvIyRPjTezgmWn9gmKwkQjjx6BtqDHVQ==
 
 hash-wasm@^4.9.0:
   version "4.9.0"
